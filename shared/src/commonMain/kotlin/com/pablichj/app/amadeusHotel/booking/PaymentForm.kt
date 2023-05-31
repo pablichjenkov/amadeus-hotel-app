@@ -1,5 +1,6 @@
 package com.pablichj.app.amadeusHotel.booking
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +21,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -30,9 +34,12 @@ internal fun PaymentForm(
     modifier: Modifier = Modifier,
     onSubmitBookingRequest: (PaymentFormState) -> Unit
 ) {
+    val focus = LocalFocusManager.current
     val paymentFormState = remember { PaymentFormState() }
     Column(
-        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState())
+        modifier = modifier.fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .clickable { focus.clearFocus() }
     ) {
         PayerPersonalInfo(modifier, paymentFormState)
         PayerCardInfo(modifier, paymentFormState)
@@ -45,11 +52,13 @@ internal fun PaymentForm(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun PayerPersonalInfo(
     modifier: Modifier = Modifier,
     paymentFormState: PaymentFormState
 ) {
+    val focus = LocalFocusManager.current
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
@@ -73,7 +82,7 @@ internal fun PayerPersonalInfo(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Next)
                     }
                 ),
                 onValueChange = {
@@ -93,7 +102,7 @@ internal fun PayerPersonalInfo(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Next)
                     }
                 ),
                 onValueChange = {
@@ -113,7 +122,7 @@ internal fun PayerPersonalInfo(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Next)
                     }
                 ),
                 onValueChange = {
@@ -133,7 +142,7 @@ internal fun PayerPersonalInfo(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Exit)
                     }
                 ),
                 onValueChange = {
@@ -152,6 +161,7 @@ internal fun PayerCardInfo(
     modifier: Modifier = Modifier,
     paymentFormState: PaymentFormState
 ) {
+    val focus = LocalFocusManager.current
     var cardBrand by remember { mutableStateOf("") }
     var cardNumber by remember { mutableStateOf("") }
     var cardExpDate by remember { mutableStateOf("") }
@@ -174,7 +184,7 @@ internal fun PayerCardInfo(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Next)
                     }
                 ),
                 onValueChange = {
@@ -194,7 +204,7 @@ internal fun PayerCardInfo(
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Next)
                     }
                 ),
                 onValueChange = {
@@ -210,11 +220,11 @@ internal fun PayerCardInfo(
                 label = { Text("Expire Date") },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next
+                    imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
                     onNext = {
-                        //focus.moveFocus(FocusDirection.Next)
+                        focus.moveFocus(FocusDirection.Next)
                     }
                 ),
                 onValueChange = {

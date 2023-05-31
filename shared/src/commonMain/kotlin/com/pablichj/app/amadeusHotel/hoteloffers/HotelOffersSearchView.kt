@@ -1,7 +1,9 @@
 package com.pablichj.app.amadeusHotel.hoteloffers
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -38,7 +40,12 @@ internal fun HotelOffersSearchView(
     onHotelOffersRequest: (HotelOffersRequestData) -> Unit,
     onOfferSelected: (HotelOfferSearch.Offer) -> Unit
 ) {
-    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+    val focus = LocalFocusManager.current
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .clickable { focus.clearFocus() }
+    ) {
         HotelOffersSearchTopForm(
             hotelListing = hotelListing,
             onHotelOffersRequest = {
@@ -92,8 +99,8 @@ internal fun HotelOffersSearchTopForm(
 
     Column(
         Modifier
-            .padding(horizontal = 16.dp)
             .padding(top = 32.dp)
+            .padding(horizontal = 16.dp)
     ) {
         Text(
             text = "Fill reservation details",
