@@ -57,7 +57,7 @@ kotlin {
         // ANDROID
         val androidMain by getting {
             dependencies {
-                implementation("androidx.activity:activity-compose:1.7.1")
+                implementation("androidx.activity:activity-compose:1.7.2")
             }
         }
         val androidUnitTest by getting {

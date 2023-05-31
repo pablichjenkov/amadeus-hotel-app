@@ -1,9 +1,8 @@
 package com.pablichj.app.amadeusHotel
 
 import androidx.compose.material.MaterialTheme
-import com.pablichj.app.amadeusHotel.AppBuilder
-import com.pablichj.incubator.uistate3.BrowserComponentRender
 import com.pablichj.incubator.uistate3.BrowserViewportWindow
+import com.pablichj.templato.component.core.BrowserComponentRender
 import org.jetbrains.skiko.wasm.onWasmReady
 
 fun main() {

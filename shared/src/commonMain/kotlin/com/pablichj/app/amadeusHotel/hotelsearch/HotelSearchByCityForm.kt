@@ -1,7 +1,9 @@
 package com.pablichj.app.amadeusHotel.hotelsearch
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -33,9 +36,14 @@ internal fun HotelSearchByCityForm(
     onHotelSelected: (HotelListing) -> Unit,
     hotelList: State<LoadableState<List<HotelListing>>?>//List<HotelListing>
 ) {
+    val focus = LocalFocusManager.current
     var cityName by remember { mutableStateOf("Miami") }
 
-    Column(modifier.verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = modifier.fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .clickable { focus.clearFocus() }
+    ) {
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = "Select a place to visit",
