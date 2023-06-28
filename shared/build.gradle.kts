@@ -40,7 +40,7 @@ kotlin {
         // COMMON
         val commonMain by getting {
             dependencies {
-                api("io.github.pablichjenkov:templato-components:0.1.22")
+                api("io.github.pablichjenkov:component-toolkit:0.1.30")
                 implementation("io.github.pablichjenkov:amadeus-api:0.1.10")
                 implementation(compose.ui)
                 implementation(compose.foundation)
