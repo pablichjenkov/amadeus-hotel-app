@@ -25,8 +25,7 @@ class BookingResultComponent(
 
     private var result by mutableStateOf("")
 
-    override fun start() {
-        super.start()
+    override fun onStart() {
         result = if (confirmations.isEmpty()) {
             "Booking Failed"
         } else {

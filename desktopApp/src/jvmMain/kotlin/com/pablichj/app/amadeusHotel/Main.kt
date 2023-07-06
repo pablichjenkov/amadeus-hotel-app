@@ -21,7 +21,6 @@ fun main() {
     val rootComponent = AppBuilder.buildGraph()
     val desktopBridge = DesktopBridge(
         appLifecycleDispatcher = DefaultAppLifecycleDispatcher(),
-        onBackPressEvent = { exitProcess(0) }
     )
     singleWindowApplication(
         title = "Hotel Booking",

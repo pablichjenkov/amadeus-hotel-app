@@ -14,14 +14,12 @@ class AccountComponent : Component() {
         authComponent.setParent(this)
     }
 
-    override fun start() {
-        super.start()
-        authComponent.start()
+    override fun onStart() {
+        authComponent.dispatchStart()
     }
 
-    override fun stop() {
-        super.stop()
-        authComponent.stop()
+    override fun onStop() {
+        authComponent.dispatchStop()
     }
 
     @Composable

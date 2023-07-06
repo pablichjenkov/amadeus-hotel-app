@@ -4,7 +4,7 @@ import HotelBookingKt
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var iosBridgeCopy: Templato_componentsIosBridge?
+    var iosBridgeCopy: IosBridge?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -41,11 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        iosBridgeCopy?.appLifecycleDispatcher.dispatchAppLifecycleEvent(appLifecycleEvent: .Start)
+        iosBridgeCopy?.appLifecycleDispatcher.dispatchAppLifecycleEvent(appLifecycleEvent: .start)
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        iosBridgeCopy?.appLifecycleDispatcher.dispatchAppLifecycleEvent(appLifecycleEvent: .Stop)
+        iosBridgeCopy?.appLifecycleDispatcher.dispatchAppLifecycleEvent(appLifecycleEvent: .stop)
     }
     
 }

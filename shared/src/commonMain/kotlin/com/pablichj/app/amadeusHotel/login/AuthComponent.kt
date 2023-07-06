@@ -51,14 +51,12 @@ class AuthComponent : StackComponent(DefaultConfig) {
         }
     }
 
-    override fun start() {
-        super.start()
-        activeComponent.value?.start()
+    override fun onStart() {
+        activeComponent.value?.dispatchStart()
     }
 
-    override fun stop() {
-        super.stop()
-        activeComponent.value?.stop()
+    override fun onStop() {
+        activeComponent.value?.dispatchStop()
     }
 
     fun isUserLogin(): Boolean {

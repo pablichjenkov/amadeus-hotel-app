@@ -1,13 +1,13 @@
 package com.pablichj.app.amadeusHotel
 
 import androidx.compose.material.MaterialTheme
-import com.pablichj.incubator.uistate3.BrowserViewportWindow
 import com.pablichj.templato.component.core.BrowserComponentRender
+import com.pablichj.templato.component.core.BrowserViewportWindow
 import org.jetbrains.skiko.wasm.onWasmReady
 
 fun main() {
     onWasmReady {
-        /*Window("Hello World") {
+        /*Window("Hotel Booking") {
             MaterialTheme {
                 BrowserComponentRender(
                     rootComponent = HelloWorldComponent(),

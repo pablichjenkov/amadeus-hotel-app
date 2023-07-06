@@ -40,7 +40,7 @@ kotlin {
         // COMMON
         val commonMain by getting {
             dependencies {
-                api("io.github.pablichjenkov:component-toolkit:0.1.30")
+                api("io.github.pablichjenkov:component-toolkit:0.2.0")
                 implementation("io.github.pablichjenkov:amadeus-api:0.1.10")
                 implementation(compose.ui)
                 implementation(compose.foundation)

@@ -23,11 +23,10 @@ class HomeComponent : StackComponent(DefaultConfig) {
     private var paymentComponent: PaymentComponent? = null
     private var bookingResultComponent: BookingResultComponent? = null
 
-    override fun start() {
-        super.start()
+    override fun onStart() {
         println("HomeComponent::start()")
         if (activeComponent.value != null) {
-            activeComponent.value?.start()
+            activeComponent.value?.dispatchStart()
         } else {
             launchHotelSearchComponent()
         }
