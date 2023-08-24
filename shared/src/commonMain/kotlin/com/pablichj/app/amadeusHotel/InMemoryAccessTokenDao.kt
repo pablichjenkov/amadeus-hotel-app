@@ -9,15 +9,16 @@ class InMemoryAccessTokenDao : IAccessTokenDao {
         private val accessTokens = mutableListOf <AccessToken>()
     }
 
-    override fun all(): List<AccessToken> {
+    override suspend fun all(): List<AccessToken> {
         return accessTokens
     }
 
-    override fun insert(accessToken: AccessToken) {
+    override suspend fun insert(accessToken: AccessToken) {
         accessTokens.add(accessToken)
     }
 
-    override fun lastOrNull(): AccessToken? {
+    override suspend fun lastOrNull(): AccessToken? {
         return accessTokens.lastOrNull()
     }
+
 }

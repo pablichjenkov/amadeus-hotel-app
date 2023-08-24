@@ -20,12 +20,10 @@ kotlin {
         summary = "Shared code for the Hotel Booking template"
         homepage = "https://github.com/pablichjenkov/templato"
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "HotelBookingKt"
             isStatic = true
         }
-        extraSpecAttributes["resources"] = "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     // JS
@@ -40,12 +38,12 @@ kotlin {
         // COMMON
         val commonMain by getting {
             dependencies {
-                api("io.github.pablichjenkov:component-toolkit:0.4.0")
-                implementation("io.github.pablichjenkov:amadeus-api:0.1.10")
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material)
                 implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.ui)
+                implementation(compose.material3)
+                api("io.github.pablichjenkov:component-toolkit:0.5.0-rc02")
+                implementation("io.github.pablichjenkov:amadeus-api:0.2.0-rc02")
             }
         }
         val commonTest by getting {
@@ -94,7 +92,7 @@ kotlin {
 
 android {
     namespace = "com.pablichj.app.amadeusHotel"
-    compileSdk = 33
+    compileSdk = (findProperty("android.compileSdk") as String).toInt()
     sourceSets {
         named("main") {
             manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -102,12 +100,11 @@ android {
         }
     }
     defaultConfig {
-        minSdk = 26
-        targetSdk = 33
+        minSdk = (findProperty("android.minSdk") as String).toInt()
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

@@ -20,18 +20,18 @@ kotlin {
 
 android {
     namespace = "com.pablichj.app.amadeusHotel"
-    compileSdk = 33
+    compileSdk = (findProperty("android.compileSdk") as String).toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         applicationId = "com.pablichj.app.amadeusHotel"
-        minSdk = 26
-        targetSdk = 33
+        minSdk = (findProperty("android.minSdk") as String).toInt()
+        targetSdk = (findProperty("android.targetSdk") as String).toInt()
         versionCode = 1
         versionName = "1.0"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     packagingOptions {
         resources {

@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -47,13 +47,13 @@ internal fun HotelSearchByCityForm(
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = "Select a place to visit",
-            style = MaterialTheme.typography.h4
+            style = MaterialTheme.typography.bodyLarge
         )
         Spacer(Modifier.height(8.dp))
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = "Type an exact address of the place you want to go or just type the city name.",
-            style = MaterialTheme.typography.subtitle1
+            style = MaterialTheme.typography.bodyMedium
         )
         Spacer(Modifier.height(24.dp))
         OutlinedTextField(
@@ -87,7 +87,7 @@ internal fun HotelSearchByCityForm(
                 Text(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                     text = "Results:",
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.bodyLarge
                 )
                 loadableStateCopy.value.forEach { hotelListing ->
                     HotelListingView(

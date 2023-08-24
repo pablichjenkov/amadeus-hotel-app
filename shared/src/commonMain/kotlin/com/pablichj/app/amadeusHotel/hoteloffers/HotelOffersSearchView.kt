@@ -11,10 +11,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -104,12 +104,12 @@ internal fun HotelOffersSearchTopForm(
     ) {
         Text(
             text = "Fill reservation details",
-            style = MaterialTheme.typography.h4
+            style = MaterialTheme.typography.bodyLarge
         )
         Spacer(Modifier.height(12.dp))
         Text(
             text = "Offers availability will be based on the data you input",
-            style = MaterialTheme.typography.body1
+            style = MaterialTheme.typography.bodyMedium
         )
         Spacer(Modifier.height(24.dp))
         Text(

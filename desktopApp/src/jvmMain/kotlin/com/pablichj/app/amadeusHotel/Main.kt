@@ -19,26 +19,16 @@ fun main() {
     //todo: Use the adaptable node in this case
     val windowState = WindowState(size = DpSize(500.dp, 800.dp))
     val rootComponent = AppBuilder.buildGraph()
-    val desktopBridge = DesktopBridge(
-        appLifecycleDispatcher = DefaultAppLifecycleDispatcher(),
-    )
+    val desktopBridge = DesktopBridge()
     singleWindowApplication(
         title = "Hotel Booking",
         state = windowState
     ) {
         DesktopComponentRender(
             rootComponent = rootComponent,
+            windowState = windowState,
             desktopBridge = desktopBridge
         )
-        LaunchedEffect(window.state) {
-            launch {
-                snapshotFlow { windowState.isMinimized }
-                    .onEach {
-                        onWindowMinimized(desktopBridge.appLifecycleDispatcher, it)
-                    }
-                    .launchIn(this)
-            }
-        }
     }
 }
 
