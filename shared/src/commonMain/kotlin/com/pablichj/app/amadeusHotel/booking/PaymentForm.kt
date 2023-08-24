@@ -12,10 +12,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,9 +66,9 @@ internal fun PayerPersonalInfo(
     var phone by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
 
-    Card(
+    Card (
         modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-        elevation = 4.dp
+        elevation = CardDefaults.cardElevation()
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
@@ -168,7 +170,7 @@ internal fun PayerCardInfo(
 
     Card(
         modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-        elevation = 4.dp
+        elevation = CardDefaults.cardElevation()
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().padding(16.dp),

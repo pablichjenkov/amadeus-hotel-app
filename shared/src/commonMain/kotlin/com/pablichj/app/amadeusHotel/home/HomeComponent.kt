@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.ui.Modifier
 import com.pablichj.app.amadeusHotel.booking.BookingResultComponent
 import com.pablichj.incubator.amadeus.endpoint.hotels.model.HotelListing
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.model.HotelOfferSearch
@@ -15,8 +16,12 @@ import com.pablichj.incubator.amadeus.endpoint.booking.hotel.model.HotelBookingC
 import com.pablichj.templato.component.core.Component
 import com.pablichj.templato.component.core.stack.StackBarItem
 import com.pablichj.templato.component.core.stack.StackComponent
+import com.pablichj.templato.component.core.topbar.TopBarComponent
+import com.pablichj.templato.component.core.topbar.TopBarStatePresenterDefault
 
-class HomeComponent : StackComponent(DefaultConfig) {
+class HomeComponent : TopBarComponent<TopBarStatePresenterDefault>(
+    topBarStatePresenter = createDefaultTopBarStatePresenter()
+) {
     private var hotelSearchComponent: HotelSearchComponent? = null
     private var hotelOffersComponent: HotelOffersComponent? = null
     private var offerFullDetailComponent: OfferFullDetailComponent? = null
@@ -32,8 +37,8 @@ class HomeComponent : StackComponent(DefaultConfig) {
         }
     }
 
-    override fun getStackBarItemFromComponent(component: Component): StackBarItem {
-        return when (component) {
+    override fun getStackBarItemForComponent(topComponent: Component): StackBarItem {
+        return when (topComponent) {
             is HotelSearchComponent -> {
                 StackBarItem(
                     label = "Hotel Search",
@@ -56,8 +61,6 @@ class HomeComponent : StackComponent(DefaultConfig) {
             }
         }
     }
-
-    override fun onDestroyChildComponent(component: Component) {}
 
     private fun launchHotelSearchComponent() {
         HotelSearchComponent(

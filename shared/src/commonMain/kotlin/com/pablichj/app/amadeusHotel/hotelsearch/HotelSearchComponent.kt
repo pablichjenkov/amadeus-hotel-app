@@ -2,7 +2,7 @@ package com.pablichj.app.amadeusHotel.hotelsearch
 
 import FormParam
 import QueryParam
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

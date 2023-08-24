@@ -7,11 +7,15 @@ import com.pablichj.app.amadeusHotel.AuthorizeAPI
 import com.pablichj.templato.component.core.Component
 import com.pablichj.templato.component.core.stack.StackBarItem
 import com.pablichj.templato.component.core.stack.StackComponent
+import com.pablichj.templato.component.core.topbar.TopBarComponent
+import com.pablichj.templato.component.core.topbar.TopBarStatePresenterDefault
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AuthComponent : StackComponent(DefaultConfig) {
+class AuthComponent : TopBarComponent<TopBarStatePresenterDefault>(
+    TopBarComponent.createDefaultTopBarStatePresenter()
+) {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val authManager: AuthManager = DefaultAuthManager(AuthorizeAPI())
     private val signInComponent = SignInComponent(authManager)
@@ -63,8 +67,8 @@ class AuthComponent : StackComponent(DefaultConfig) {
         return authManager.getCurrentToken().isNullOrEmpty().not()
     }
 
-    override fun getStackBarItemFromComponent(component: Component): StackBarItem {
-        val selectedNavItem = if (component == signInComponent) {
+    override fun getStackBarItemForComponent(topComponent: Component): StackBarItem {
+        val selectedNavItem = if (topComponent == signInComponent) {
             StackBarItem(
                 label = "Sign In",
                 icon = Icons.Default.Home,

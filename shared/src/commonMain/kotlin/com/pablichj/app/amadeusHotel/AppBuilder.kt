@@ -1,6 +1,6 @@
 package com.pablichj.app.amadeusHotel
 
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
@@ -12,11 +12,12 @@ import com.pablichj.app.amadeusHotel.home.HomeComponent
 import com.pablichj.templato.component.core.Component
 import com.pablichj.templato.component.core.NavItem
 import com.pablichj.templato.component.core.navbar.NavBarComponent
+import com.pablichj.templato.component.core.navbar.NavBarStatePresenterDefault
 import com.pablichj.templato.component.core.setNavItems
 
 object AppBuilder {
 
-    private lateinit var navBarComponent: NavBarComponent
+    private lateinit var navBarComponent: NavBarComponent<NavBarStatePresenterDefault>
 
     fun buildGraph(): Component {
 
@@ -51,7 +52,10 @@ object AppBuilder {
             )
         )
 
-        return NavBarComponent().also {
+        return NavBarComponent(
+            navBarStatePresenter = NavBarComponent.createDefaultNavBarStatePresenter(),
+            content = NavBarComponent.DefaultNavBarComponentView
+        ).also {
             navBarComponent = it
             it.setNavItems(navbarItems, 0)
         }
