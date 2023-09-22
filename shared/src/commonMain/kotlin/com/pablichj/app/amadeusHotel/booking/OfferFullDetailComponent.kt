@@ -45,13 +45,12 @@ class OfferFullDetailComponent(
         }
 
         val callResult = GetOfferUseCase(
-            Dispatchers
-        ).doWork(
+            Dispatchers,
             GetOfferRequest(
                 accessToken,
                 offerId
             )
-        )
+        ).doWork()
 
         return when (callResult) {
             is CallResult.Error -> {

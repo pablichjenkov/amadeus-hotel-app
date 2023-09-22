@@ -16,9 +16,7 @@ import com.pablichj.incubator.amadeus.endpoint.accesstoken.GetAccessTokenRequest
 import com.pablichj.incubator.amadeus.endpoint.accesstoken.GetAccessTokenUseCase
 import com.pablichj.incubator.amadeus.endpoint.accesstoken.ResolveAccessTokenUseCaseSource
 import com.pablichj.incubator.amadeus.endpoint.accesstoken.model.AccessToken
-import com.pablichj.incubator.amadeus.endpoint.city.CitySearchRequest
 import com.pablichj.incubator.amadeus.endpoint.city.CitySearchUseCase
-import com.pablichj.incubator.amadeus.endpoint.hotels.HotelsByCityRequest
 import com.pablichj.incubator.amadeus.endpoint.hotels.HotelsByCityUseCase
 import com.pablichj.incubator.amadeus.endpoint.hotels.model.HotelListing
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +38,8 @@ class HotelSearchComponent(
     private suspend fun getAccessToken(): AccessToken? {
         val clientId = BuildConfig.AMADEUS_API_KEY
         val clientSecret = BuildConfig.AMADEUS_API_SECRET
-        val callResult = GetAccessTokenUseCase(Dispatchers).doWork(
+        val callResult = GetAccessTokenUseCase(
+            Dispatchers,
             GetAccessTokenRequest(
                 listOf(
                     FormParam.ClientId(clientId),
@@ -48,7 +47,7 @@ class HotelSearchComponent(
                     FormParam.GrantType(GetAccessTokenUseCase.AccessTokenGrantType),
                 )
             )
-        )
+        ).doWork()
         return when (callResult) {
             is CallResult.Error -> {
                 println("Error fetching access token: ${callResult.error}")
@@ -78,18 +77,12 @@ class HotelSearchComponent(
         }
 
         val callResult = CitySearchUseCase(
-            Dispatchers
-        ).doWork(
-            //?countryCode=FR&keyword=PARIS&max=10
-            CitySearchRequest(
-                accessToken,
-                listOf(
-                    QueryParam.CountryCode("US"),
-                    QueryParam.Max("3"),
-                    QueryParam.Keyword(city)
-                )
-            )
-        )
+            Dispatchers,
+            accessToken,
+            QueryParam.CountryCode("US"),
+            QueryParam.Keyword(city),
+            QueryParam.Max("3")
+        ).doWork()
 
         return when (callResult) {
             is CallResult.Error -> {
@@ -117,19 +110,13 @@ class HotelSearchComponent(
         }
 
         val callResult = HotelsByCityUseCase(
-            Dispatchers
-        ).doWork(
-            //?cityCode=PAR&radius=1&radiusUnit=KM&hotelSource=ALL
-            HotelsByCityRequest(
-                accessToken,
-                listOf(
-                    QueryParam.CityCode(iataCityCode),
-                    QueryParam.Radius("2"),
-                    QueryParam.RadiusUnit("KM"),
-                    QueryParam.HotelSource("ALL")
-                )
-            )
-        )
+            Dispatchers,
+            accessToken,
+            QueryParam.CityCode(iataCityCode),
+            QueryParam.Radius("2"),
+            QueryParam.RadiusUnit("KM"),
+            QueryParam.HotelSource("ALL")
+        ).doWork()
 
         return when (callResult) {
             is CallResult.Error -> {
