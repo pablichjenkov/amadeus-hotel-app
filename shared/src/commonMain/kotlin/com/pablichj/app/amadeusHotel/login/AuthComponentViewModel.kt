@@ -3,42 +3,45 @@ package com.pablichj.app.amadeusHotel.login
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import com.macaosoftware.component.core.Component
+import com.macaosoftware.component.topbar.TopBarComponent
+import com.macaosoftware.component.topbar.TopBarComponentViewModel
+import com.macaosoftware.component.topbar.TopBarItem
+import com.macaosoftware.component.topbar.TopBarStatePresenterDefault
 import com.pablichj.app.amadeusHotel.AuthorizeAPI
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.stack.StackBarItem
-import com.pablichj.templato.component.core.stack.StackComponent
-import com.pablichj.templato.component.core.topbar.TopBarComponent
-import com.pablichj.templato.component.core.topbar.TopBarStatePresenterDefault
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AuthComponent : TopBarComponent<TopBarStatePresenterDefault>(
-    TopBarComponent.createDefaultTopBarStatePresenter()
-) {
+class AuthComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefault>() {
+
+    private lateinit var authComponent: TopBarComponent<TopBarStatePresenterDefault>
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val authManager: AuthManager = DefaultAuthManager(AuthorizeAPI())
     private val signInComponent = SignInComponent(authManager)
     private val signUpComponent = SignUpComponent(authManager)
     private val forgotPasswordComponent = ForgotPasswordComponent(authManager)
 
-    init {
-        signUpComponent.setParent(this)
-        signInComponent.setParent(this)
-        forgotPasswordComponent.setParent(this)
-
+    override fun onCreate(topBarComponent: TopBarComponent<TopBarStatePresenterDefault>) {
+        this.authComponent = topBarComponent
+        signUpComponent.setParent(topBarComponent)
+        signInComponent.setParent(topBarComponent)
+        forgotPasswordComponent.setParent(topBarComponent)
         coroutineScope.launch {
             signInComponent.outFlow.collect {
                 when (it) {
                     SignInComponent.Out.SignUpClick -> {
-                        backStack.push(signUpComponent)
+                        topBarComponent.backStack.push(signUpComponent)
                     }
+
                     SignInComponent.Out.ForgotPasswordClick -> {
-                        backStack.push(forgotPasswordComponent)
+                        topBarComponent.backStack.push(forgotPasswordComponent)
                     }
+
                     SignInComponent.Out.LoginFail -> {
                         println("Pablo:: Login Fail")
                     }
+
                     SignInComponent.Out.LoginSuccess -> {
                         println("Pablo:: Login Success")
                     }
@@ -51,35 +54,48 @@ class AuthComponent : TopBarComponent<TopBarStatePresenterDefault>(
         }
 
         if (isUserLogin().not()) {
-            backStack.push(signInComponent)
+            authComponent.backStack.push(signInComponent)
         }
     }
 
-    override fun onStart() {
-        activeComponent.value?.dispatchStart()
-    }
-
-    override fun onStop() {
-        activeComponent.value?.dispatchStop()
-    }
-
-    fun isUserLogin(): Boolean {
-        return authManager.getCurrentToken().isNullOrEmpty().not()
-    }
-
-    override fun getStackBarItemForComponent(topComponent: Component): StackBarItem {
+    override fun mapComponentToStackBarItem(topComponent: Component): TopBarItem {
         val selectedNavItem = if (topComponent == signInComponent) {
-            StackBarItem(
+            TopBarItem(
                 label = "Sign In",
                 icon = Icons.Default.Home,
             )
         } else {
-            StackBarItem(
+            TopBarItem(
                 label = "Search",
                 icon = Icons.Default.Search,
             )
         }
         return selectedNavItem
+    }
+
+    override fun onBackstackEmpty() {
+
+    }
+
+    override fun onCheckChildForNextUriFragment(nextUriFragment: String): Component? {
+        return null
+    }
+
+
+    override fun onDestroy() {
+
+    }
+
+    override fun onStart() {
+
+    }
+
+    override fun onStop() {
+
+    }
+
+    fun isUserLogin(): Boolean {
+        return authManager.getCurrentToken().isNullOrEmpty().not()
     }
 
 }

@@ -42,8 +42,8 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.ui)
                 implementation(compose.material3)
-                api("io.github.pablichjenkov:component-toolkit:0.5.0-rc02")
-                implementation("io.github.pablichjenkov:amadeus-api:0.2.0-rc02")
+                api("io.github.pablichjenkov:component-toolkit:0.5.1")
+                implementation("io.github.pablichjenkov:amadeus-api:0.2.0")
             }
         }
         val commonTest by getting {

@@ -2,8 +2,8 @@ package com.pablichj.app.amadeusHotel.login
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.consumeBackPressEvent
+import com.macaosoftware.component.core.BackPressHandler
+import com.macaosoftware.component.core.Component
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +27,7 @@ class ForgotPasswordComponent(private val authManager: AuthManager) : Component(
     @Composable
     override fun Content(modifier: Modifier) {
         println("ForgotPasswordComponent::Composing()")
-        consumeBackPressEvent()
+        BackPressHandler()
         ForgotPasswordView { email ->
             authManager.requestRecoverPassword(email)
         }

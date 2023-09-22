@@ -2,6 +2,9 @@ package com.pablichj.app.amadeusHotel.booking
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.macaosoftware.component.core.BackPressHandler
+import com.macaosoftware.component.core.Component
+import com.pablichj.app.amadeusHotel.InMemoryAccessTokenDao
 import com.pablichj.incubator.amadeus.common.CallResult
 import com.pablichj.incubator.amadeus.endpoint.accesstoken.ResolveAccessTokenUseCaseSource
 import com.pablichj.incubator.amadeus.endpoint.booking.hotel.HotelBookingRequest
@@ -9,9 +12,6 @@ import com.pablichj.incubator.amadeus.endpoint.booking.hotel.HotelBookingUseCase
 import com.pablichj.incubator.amadeus.endpoint.booking.hotel.model.HotelBookingConfirmation
 import com.pablichj.incubator.amadeus.endpoint.booking.hotel.model.HotelBookingRequestBody
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.model.HotelOfferSearch
-import com.pablichj.app.amadeusHotel.InMemoryAccessTokenDao
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.consumeBackPressEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -92,7 +92,7 @@ class PaymentComponent(
     @Composable
     override fun Content(modifier: Modifier) {
         println("PaymentComponent::Composing()")
-        consumeBackPressEvent()
+        BackPressHandler()
         PaymentForm(
             modifier = modifier,
             onSubmitBookingRequest = {

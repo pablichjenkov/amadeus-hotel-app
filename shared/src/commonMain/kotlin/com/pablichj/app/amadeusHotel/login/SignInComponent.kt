@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.consumeBackPressEvent
+import com.macaosoftware.component.core.BackPressHandler
+import com.macaosoftware.component.core.Component
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
@@ -30,9 +30,11 @@ class SignInComponent(private val authManager: AuthManager) : Component() {
                         showProgressIndicator.value = false
                         outFlow.emit(Out.LoginFail)
                     }
+
                     SignInRequestStatus.SignInInProgress -> {
                         showProgressIndicator.value = true
                     }
+
                     is SignInRequestStatus.SignInSuccess -> {
                         showProgressIndicator.value = false
                         outFlow.emit(Out.LoginSuccess)
@@ -54,7 +56,7 @@ class SignInComponent(private val authManager: AuthManager) : Component() {
     override fun Content(modifier: Modifier) {
         println("SignInComponent::Composing()")
         Box {
-            consumeBackPressEvent()
+            BackPressHandler()
             //SignInView({},{},{})
             SignInView2(
                 { coroutineScope.launch { outFlow.emit(Out.SignUpClick) } },
