@@ -11,7 +11,6 @@ import com.pablichj.app.amadeusHotel.ui.LoadableState
 import com.pablichj.incubator.amadeus.common.CallResult
 import com.pablichj.incubator.amadeus.endpoint.accesstoken.ResolveAccessTokenUseCaseSource
 import com.pablichj.incubator.amadeus.endpoint.hotels.model.HotelListing
-import com.pablichj.incubator.amadeus.endpoint.offers.hotel.MultiHotelOffersRequest
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.MultiHotelOffersUseCase
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.model.HotelOfferSearch
 import kotlinx.coroutines.CoroutineScope
@@ -41,19 +40,14 @@ class HotelOffersComponent(
         }
 
         val callResult = MultiHotelOffersUseCase(
-            Dispatchers
-        ).doWork(
-            MultiHotelOffersRequest(
-                accessToken,
-                listOf(
-                    QueryParam.HotelIds(hotelOffersRequestData.hotelId),
-                    QueryParam.Adults(hotelOffersRequestData.numberOfAdults),
-                    QueryParam.CheckInDate(hotelOffersRequestData.checkingDate),
-                    QueryParam.RoomQuantity(hotelOffersRequestData.roomQuantity),
-                    QueryParam.BestRateOnly("false")
-                )
-            )
-        )
+            Dispatchers,
+            accessToken,
+            QueryParam.HotelIds(hotelOffersRequestData.hotelId),
+            QueryParam.Adults(hotelOffersRequestData.numberOfAdults),
+            QueryParam.CheckInDate(hotelOffersRequestData.checkingDate),
+            QueryParam.RoomQuantity(hotelOffersRequestData.roomQuantity),
+            QueryParam.BestRateOnly("false")
+        ).doWork()
 
         return when (callResult) {
             is CallResult.Error -> {

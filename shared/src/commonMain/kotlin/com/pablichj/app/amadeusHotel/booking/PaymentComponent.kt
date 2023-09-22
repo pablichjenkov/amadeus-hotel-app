@@ -39,13 +39,12 @@ class PaymentComponent(
         }
 
         val callResult = HotelBookingUseCase(
-            Dispatchers
-        ).doWork(
+            Dispatchers,
             HotelBookingRequest(
                 accessToken,
                 bookingRequestBody
             )
-        )
+        ).doWork()
 
         return when (callResult) {
             is CallResult.Error -> {
