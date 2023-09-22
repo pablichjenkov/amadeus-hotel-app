@@ -14,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.macaosoftware.component.core.BackPressHandler
+import com.macaosoftware.component.core.Component
 import com.pablichj.incubator.amadeus.endpoint.booking.hotel.model.HotelBookingConfirmation
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.consumeBackPressEvent
 
 class BookingResultComponent(
     private val confirmations: List<HotelBookingConfirmation>,
@@ -36,7 +36,7 @@ class BookingResultComponent(
     @Composable
     override fun Content(modifier: Modifier) {
         println("PaymentComponent::Composing()")
-        consumeBackPressEvent()
+        BackPressHandler()
         Column(
             modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

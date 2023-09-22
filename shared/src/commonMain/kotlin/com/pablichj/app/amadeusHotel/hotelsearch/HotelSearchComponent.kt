@@ -2,15 +2,13 @@ package com.pablichj.app.amadeusHotel.hotelsearch
 
 import FormParam
 import QueryParam
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.macaosoftware.component.core.BackPressHandler
+import com.macaosoftware.component.core.Component
 import com.pablichj.app.amadeusHotel.InMemoryAccessTokenDao
 import com.pablichj.app.amadeusHotel.shared.BuildConfig
-import com.pablichj.app.amadeusHotel.ui.FullScreenLoader
 import com.pablichj.app.amadeusHotel.ui.LoadableState
 import com.pablichj.incubator.amadeus.common.CallResult
 import com.pablichj.incubator.amadeus.common.model.City
@@ -23,8 +21,6 @@ import com.pablichj.incubator.amadeus.endpoint.city.CitySearchUseCase
 import com.pablichj.incubator.amadeus.endpoint.hotels.HotelsByCityRequest
 import com.pablichj.incubator.amadeus.endpoint.hotels.HotelsByCityUseCase
 import com.pablichj.incubator.amadeus.endpoint.hotels.model.HotelListing
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.consumeBackPressEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -176,7 +172,7 @@ class HotelSearchComponent(
     @Composable
     override fun Content(modifier: Modifier) {
         println("HotelSearchComponent::Composing()")
-        consumeBackPressEvent()
+        BackPressHandler()
         HotelSearchByCityForm(
             modifier = modifier,
             onCitySearchRequest = { cityName ->

@@ -6,6 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.macaosoftware.component.core.BackPressHandler
+import com.macaosoftware.component.core.Component
 import com.pablichj.app.amadeusHotel.InMemoryAccessTokenDao
 import com.pablichj.app.amadeusHotel.ui.FullScreenLoader
 import com.pablichj.app.amadeusHotel.ui.LoadableState
@@ -14,8 +16,6 @@ import com.pablichj.incubator.amadeus.endpoint.accesstoken.ResolveAccessTokenUse
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.GetOfferRequest
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.GetOfferUseCase
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.model.HotelOfferSearch
-import com.pablichj.templato.component.core.Component
-import com.pablichj.templato.component.core.consumeBackPressEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -87,7 +87,7 @@ class OfferFullDetailComponent(
     @Composable
     override fun Content(modifier: Modifier) {
         println("OfferFullDetailComponent::Composing()")
-        consumeBackPressEvent()
+        BackPressHandler()
         when (val loadableStateCopy = loadableState) {
             LoadableState.Error -> {
                 Text("Error confirming the offer price")
