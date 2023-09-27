@@ -2,11 +2,11 @@ package com.pablichj.incubator.uistate3.example.hotelBooking
 
 import com.macaosoftware.component.IosComponentRender
 import com.macaosoftware.component.core.Component
-import com.macaosoftware.component.navbar.NavBarComponent
-import com.macaosoftware.component.navbar.NavBarComponentDefaults
+import com.macaosoftware.component.navbar.BottomNavigationComponent
+import com.macaosoftware.component.navbar.BottomNavigationComponentDefaults
 import com.macaosoftware.platform.DefaultAppLifecycleDispatcher
 import com.macaosoftware.platform.IosBridge
-import com.pablichj.app.amadeusHotel.BottomNavigationDemoViewModel
+import com.pablichj.app.amadeusHotel.RootBottomNavigationDemoViewModelFactory
 import platform.UIKit.UIViewController
 
 fun ComponentRenderer(
@@ -20,10 +20,11 @@ fun ComponentRenderer(
 )
 
 fun buildAppComponent(): Component {
-    return NavBarComponent(
-        navBarStatePresenter = NavBarComponentDefaults.createNavBarStatePresenter(),
-        componentViewModel = BottomNavigationDemoViewModel(),
-        content = NavBarComponentDefaults.NavBarComponentView
+    return BottomNavigationComponent(
+        viewModelFactory = RootBottomNavigationDemoViewModelFactory(
+            bottomNavigationStatePresenter = BottomNavigationComponentDefaults.createBottomNavigationStatePresenter(),
+        ),
+        content = BottomNavigationComponentDefaults.BottomNavigationComponentView
     )
 }
 
