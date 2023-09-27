@@ -7,16 +7,18 @@ import com.macaosoftware.component.core.Component
 import com.macaosoftware.component.topbar.TopBarComponent
 import com.macaosoftware.component.topbar.TopBarComponentDefaults
 import com.pablichj.app.amadeusHotel.login.AuthComponentViewModel
+import com.pablichj.app.amadeusHotel.login.AuthComponentViewModelFactory
 
 class AccountComponent : Component() {
 
-    val authComponentViewModel = AuthComponentViewModel()
-
-    val authComponent = TopBarComponent(
-        topBarStatePresenter = TopBarComponentDefaults.createTopBarStatePresenter(),
-        componentViewModel = authComponentViewModel,
+    private val authComponent = TopBarComponent(
+        viewModelFactory = AuthComponentViewModelFactory(
+            TopBarComponentDefaults.createTopBarStatePresenter()
+        ),
         content = TopBarComponentDefaults.TopBarComponentView
     )
+
+    val authComponentViewModel = authComponent.componentViewModel
 
     init {
         authComponent.setParent(this)

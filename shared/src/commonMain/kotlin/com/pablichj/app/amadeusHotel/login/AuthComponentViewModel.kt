@@ -13,20 +13,22 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AuthComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefault>() {
+class AuthComponentViewModel(
+    topBarComponent: TopBarComponent<AuthComponentViewModel>,
+    override val topBarStatePresenter: TopBarStatePresenterDefault
+) : TopBarComponentViewModel(topBarComponent) {
 
-    private lateinit var authComponent: TopBarComponent<TopBarStatePresenterDefault>
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val authManager: AuthManager = DefaultAuthManager(AuthorizeAPI())
     private val signInComponent = SignInComponent(authManager)
     private val signUpComponent = SignUpComponent(authManager)
     private val forgotPasswordComponent = ForgotPasswordComponent(authManager)
 
-    override fun onCreate(topBarComponent: TopBarComponent<TopBarStatePresenterDefault>) {
-        this.authComponent = topBarComponent
+    override fun onCreate() {
         signUpComponent.setParent(topBarComponent)
         signInComponent.setParent(topBarComponent)
         forgotPasswordComponent.setParent(topBarComponent)
+
         coroutineScope.launch {
             signInComponent.outFlow.collect {
                 when (it) {
@@ -54,7 +56,7 @@ class AuthComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
         }
 
         if (isUserLogin().not()) {
-            authComponent.backStack.push(signInComponent)
+            topBarComponent.backStack.push(signInComponent)
         }
     }
 
@@ -82,15 +84,15 @@ class AuthComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
     }
 
 
-    override fun onDestroy() {
-
-    }
-
     override fun onStart() {
 
     }
 
     override fun onStop() {
+
+    }
+
+    override fun onDestroy() {
 
     }
 

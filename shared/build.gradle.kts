@@ -11,9 +11,10 @@ version = "0.1.0"
 
 kotlin {
     // ANDROID
-    android()
+    androidTarget()
 
     // IOS
+    iosX64()
     iosArm64()
     iosSimulatorArm64()
     cocoapods {
@@ -42,8 +43,8 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.ui)
                 implementation(compose.material3)
-                api("io.github.pablichjenkov:component-toolkit:0.5.1")
-                implementation("io.github.pablichjenkov:amadeus-api:0.3.0")
+                api("io.github.pablichjenkov:component-toolkit:0.5.6")
+                implementation("io.github.pablichjenkov:amadeus-api:0.3.2")
             }
         }
         val commonTest by getting {
@@ -66,17 +67,22 @@ kotlin {
         val androidInstrumentedTest by getting
 
         // IOS
+        val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
+
+        val iosX64Test by getting
         val iosArm64Test by getting
         val iosSimulatorArm64Test by getting
         val iosTest by creating {
             dependsOn(commonTest)
+            iosX64Test.dependsOn(this)
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }

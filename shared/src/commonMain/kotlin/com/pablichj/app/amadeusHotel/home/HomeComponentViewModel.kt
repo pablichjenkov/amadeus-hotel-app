@@ -18,17 +18,19 @@ import com.pablichj.incubator.amadeus.endpoint.booking.hotel.model.HotelBookingC
 import com.pablichj.incubator.amadeus.endpoint.hotels.model.HotelListing
 import com.pablichj.incubator.amadeus.endpoint.offers.hotel.model.HotelOfferSearch
 
-class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefault>() {
+class HomeComponentViewModel(
+    topBarComponent: TopBarComponent<HomeComponentViewModel>,
+    override val topBarStatePresenter: TopBarStatePresenterDefault
+) : TopBarComponentViewModel(topBarComponent) {
 
-    private lateinit var homeComponent: TopBarComponent<TopBarStatePresenterDefault>
     private var hotelSearchComponent: HotelSearchComponent? = null
     private var hotelOffersComponent: HotelOffersComponent? = null
     private var offerFullDetailComponent: OfferFullDetailComponent? = null
     private var paymentComponent: PaymentComponent? = null
     private var bookingResultComponent: BookingResultComponent? = null
 
-    override fun onCreate(topBarComponent: TopBarComponent<TopBarStatePresenterDefault>) {
-        homeComponent = topBarComponent
+    override fun onCreate() {
+        println("HomeComponentViewModel::onCreate()")
     }
 
     override fun onStart() {
@@ -71,7 +73,7 @@ class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
     }
 
     override fun onCheckChildForNextUriFragment(nextUriFragment: String): Component? {
-    return null
+        return null
     }
 
     private fun launchHotelSearchComponent() {
@@ -79,8 +81,8 @@ class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
             onHotelSelected = { launchHotelOffersComponent(it) }
         ).also {
             hotelSearchComponent = it
-            it.setParent(homeComponent)
-            homeComponent.backStack.push(it)
+            it.setParent(topBarComponent)
+            topBarComponent.backStack.push(it)
         }
     }
 
@@ -92,8 +94,8 @@ class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
             }
         ).also {
             hotelOffersComponent = it
-            it.setParent(homeComponent)
-            homeComponent.backStack.push(it)
+            it.setParent(topBarComponent)
+            topBarComponent.backStack.push(it)
         }
     }
 
@@ -105,8 +107,8 @@ class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
             }
         ).also {
             offerFullDetailComponent = it
-            it.setParent(homeComponent)
-            homeComponent.backStack.push(it)
+            it.setParent(topBarComponent)
+            topBarComponent.backStack.push(it)
         }
     }
 
@@ -118,8 +120,8 @@ class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
             }
         ).also {
             paymentComponent = it
-            it.setParent(homeComponent)
-            homeComponent.backStack.push(it)
+            it.setParent(topBarComponent)
+            topBarComponent.backStack.push(it)
         }
     }
 
@@ -127,12 +129,12 @@ class HomeComponentViewModel : TopBarComponentViewModel<TopBarStatePresenterDefa
         BookingResultComponent(
             confirmations = confirmations,
             onAcceptClick = {
-                homeComponent.backStack.popToIndex(0)
+                topBarComponent.backStack.popToIndex(0)
             }
         ).also {
             bookingResultComponent = it
-            it.setParent(homeComponent)
-            homeComponent.backStack.push(it)
+            it.setParent(topBarComponent)
+            topBarComponent.backStack.push(it)
         }
     }
 

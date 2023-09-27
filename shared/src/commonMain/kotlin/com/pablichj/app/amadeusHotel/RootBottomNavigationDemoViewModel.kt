@@ -10,21 +10,23 @@ import androidx.compose.ui.Modifier
 import com.macaosoftware.component.core.Component
 import com.macaosoftware.component.core.NavItem
 import com.macaosoftware.component.core.setNavItems
-import com.macaosoftware.component.navbar.NavBarComponent
-import com.macaosoftware.component.navbar.NavBarComponentViewModel
-import com.macaosoftware.component.navbar.NavBarStatePresenterDefault
+import com.macaosoftware.component.navbar.BottomNavigationComponent
+import com.macaosoftware.component.navbar.BottomNavigationComponentViewModel
+import com.macaosoftware.component.navbar.BottomNavigationStatePresenterDefault
 import com.macaosoftware.component.topbar.TopBarComponent
 import com.macaosoftware.component.topbar.TopBarComponentDefaults
 import com.pablichj.app.amadeusHotel.account.AccountComponent
-import com.pablichj.app.amadeusHotel.home.HomeComponentViewModel
+import com.pablichj.app.amadeusHotel.home.HomeComponentViewModelFactory
 
-class BottomNavigationDemoViewModel : NavBarComponentViewModel<NavBarStatePresenterDefault>() {
-
-    private lateinit var navBarComponent: NavBarComponent<NavBarStatePresenterDefault>
+class RootBottomNavigationDemoViewModel(
+    bottomNavigationComponent: BottomNavigationComponent<RootBottomNavigationDemoViewModel>,
+    override val bottomNavigationStatePresenter: BottomNavigationStatePresenterDefault
+) : BottomNavigationComponentViewModel(bottomNavigationComponent) {
 
     private val homeComponent = TopBarComponent(
-        topBarStatePresenter = TopBarComponentDefaults.createTopBarStatePresenter(),
-        componentViewModel = HomeComponentViewModel(),
+        viewModelFactory = HomeComponentViewModelFactory(
+            topBarStatePresenter = TopBarComponentDefaults.createTopBarStatePresenter(),
+        ),
         content = TopBarComponentDefaults.TopBarComponentView
     )
 
@@ -37,11 +39,10 @@ class BottomNavigationDemoViewModel : NavBarComponentViewModel<NavBarStatePresen
     }
     val accountComponent = AccountComponent()
 
-    override fun onCreate(navBarComponent: NavBarComponent<NavBarStatePresenterDefault>) {
-        this.navBarComponent = navBarComponent
+    override fun onCreate() {
         val navBarItems = createNavBarItems()
         val selectedIndex = 0
-        navBarComponent.setNavItems(navBarItems, selectedIndex)
+        bottomNavigationComponent.setNavItems(navBarItems, selectedIndex)
     }
 
     override fun onStart() {
