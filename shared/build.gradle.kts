@@ -43,7 +43,7 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.ui)
                 implementation(compose.material3)
-                api("io.github.pablichjenkov:component-toolkit:0.5.6")
+                api("io.github.pablichjenkov:component-toolkit:0.5.7")
                 implementation("io.github.pablichjenkov:amadeus-api:0.3.2")
             }
         }
