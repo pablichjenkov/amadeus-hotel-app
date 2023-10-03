@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import com.macaosoftware.component.core.Component
+import com.macaosoftware.component.core.push
 import com.macaosoftware.component.topbar.TopBarComponent
 import com.macaosoftware.component.topbar.TopBarComponentViewModel
 import com.macaosoftware.component.topbar.TopBarItem
@@ -33,11 +34,11 @@ class AuthComponentViewModel(
             signInComponent.outFlow.collect {
                 when (it) {
                     SignInComponent.Out.SignUpClick -> {
-                        topBarComponent.backStack.push(signUpComponent)
+                        topBarComponent.navigator.push(signUpComponent)
                     }
 
                     SignInComponent.Out.ForgotPasswordClick -> {
-                        topBarComponent.backStack.push(forgotPasswordComponent)
+                        topBarComponent.navigator.push(forgotPasswordComponent)
                     }
 
                     SignInComponent.Out.LoginFail -> {
@@ -56,7 +57,7 @@ class AuthComponentViewModel(
         }
 
         if (isUserLogin().not()) {
-            topBarComponent.backStack.push(signInComponent)
+            topBarComponent.navigator.push(signInComponent)
         }
     }
 
