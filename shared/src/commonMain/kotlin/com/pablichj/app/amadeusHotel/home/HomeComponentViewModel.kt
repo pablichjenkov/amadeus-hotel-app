@@ -31,8 +31,8 @@ class HomeComponentViewModel(
     private var paymentComponent: PaymentComponent? = null
     private var bookingResultComponent: BookingResultComponent? = null
 
-    override fun onCreate() {
-        println("HomeComponentViewModel::onCreate()")
+    override fun onAttach() {
+        println("HomeComponentViewModel::onAttach()")
     }
 
     override fun onStart() {
@@ -41,9 +41,11 @@ class HomeComponentViewModel(
     }
 
     override fun onStop() {
+        println("HomeComponentViewModel::onStop()")
     }
 
-    override fun onDestroy() {
+    override fun onDetach() {
+        println("HomeComponentViewModel::onDetach()")
     }
 
     override fun mapComponentToStackBarItem(topComponent: Component): TopBarItem {
@@ -69,9 +71,6 @@ class HomeComponentViewModel(
                 )
             }
         }
-    }
-
-    override fun onBackstackEmpty() {
     }
 
     override fun onCheckChildForNextUriFragment(nextUriFragment: String): Component? {

@@ -10,9 +10,10 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":shared"))
-                //implementation("androidx.appcompat:appcompat:1.5.1")
-                implementation("androidx.activity:activity-compose:1.7.2")
-                //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+                implementation("io.github.pablichjenkov:component-toolkit:0.5.10-rc01")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+                implementation("androidx.activity:activity-compose:1.8.0")
             }
         }
     }
@@ -39,6 +40,7 @@ android {
             pickFirsts.apply {
                 add("META-INF/kotlinx_coroutines_core.version")
                 add("META-INF/INDEX.LIST")
+                add("META-INF/versions/9/previous-compilation-data.bin")
             }
         }
     }

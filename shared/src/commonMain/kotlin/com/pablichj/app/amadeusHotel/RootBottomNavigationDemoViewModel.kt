@@ -39,7 +39,7 @@ class RootBottomNavigationDemoViewModel(
     }
     val accountComponent = AccountComponent()
 
-    override fun onCreate() {
+    override fun onAttach() {
         val navBarItems = createNavBarItems()
         val selectedIndex = 0
         bottomNavigationComponent.setNavItems(navBarItems, selectedIndex)
@@ -51,7 +51,7 @@ class RootBottomNavigationDemoViewModel(
     override fun onStop() {
     }
 
-    override fun onDestroy() {
+    override fun onDetach() {
     }
 
     private fun createNavBarItems(): MutableList<NavItem> {
