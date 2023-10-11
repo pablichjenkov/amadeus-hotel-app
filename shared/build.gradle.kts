@@ -1,8 +1,7 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
     id("org.jetbrains.compose")
+    kotlin("native.cocoapods")
     id("com.github.gmazzo.buildconfig")
 }
 
@@ -10,8 +9,6 @@ group = "com.pablichj"
 version = "0.1.0"
 
 kotlin {
-    // ANDROID
-    androidTarget()
 
     // IOS
     iosX64()
@@ -43,8 +40,9 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.ui)
                 implementation(compose.material3)
-                api("io.github.pablichjenkov:component-toolkit:0.5.9")
-                implementation("io.github.pablichjenkov:amadeus-api:0.3.2")
+                implementation("io.github.pablichjenkov:component-toolkit:0.5.10-rc01")
+                implementation("io.github.pablichjenkov:amadeus-api:0.3.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
             }
         }
         val commonTest by getting {
@@ -52,19 +50,6 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-
-        // ANDROID
-        val androidMain by getting {
-            dependencies {
-                implementation("androidx.activity:activity-compose:1.7.2")
-            }
-        }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation("junit:junit:4.13.2")
-            }
-        }
-        val androidInstrumentedTest by getting
 
         // IOS
         val iosX64Main by getting
@@ -94,24 +79,6 @@ kotlin {
         val desktopMain by getting
     }
 
-}
-
-android {
-    namespace = "com.pablichj.app.amadeusHotel"
-    compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    sourceSets {
-        named("main") {
-            manifest.srcFile("src/androidMain/AndroidManifest.xml")
-            res.srcDirs("src/androidMain/res", "src/commonMain/resources")
-        }
-    }
-    defaultConfig {
-        minSdk = (findProperty("android.minSdk") as String).toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
 
 buildConfig {

@@ -25,7 +25,7 @@ class AuthComponentViewModel(
     private val signUpComponent = SignUpComponent(authManager)
     private val forgotPasswordComponent = ForgotPasswordComponent(authManager)
 
-    override fun onCreate() {
+    override fun onAttach() {
         signUpComponent.setParent(topBarComponent)
         signInComponent.setParent(topBarComponent)
         forgotPasswordComponent.setParent(topBarComponent)
@@ -76,14 +76,9 @@ class AuthComponentViewModel(
         return selectedNavItem
     }
 
-    override fun onBackstackEmpty() {
-
-    }
-
     override fun onCheckChildForNextUriFragment(nextUriFragment: String): Component? {
         return null
     }
-
 
     override fun onStart() {
 
@@ -93,7 +88,7 @@ class AuthComponentViewModel(
 
     }
 
-    override fun onDestroy() {
+    override fun onDetach() {
 
     }
 
