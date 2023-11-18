@@ -4,9 +4,7 @@ import HotelBookingKt
 @main
 struct iOSDemoAppApp: App {
 
-    let iosBridge = IosBridge(
-        appLifecycleDispatcher: DefaultAppLifecycleDispatcher()
-    )
+    let iosBridge = BindingsKt.createPlatformBridge()
 
     var body: some Scene {
        WindowGroup {
