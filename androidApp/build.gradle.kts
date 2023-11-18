@@ -10,10 +10,10 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":shared"))
-                implementation("io.github.pablichjenkov:component-toolkit:0.5.10-rc01")
+                implementation("io.github.pablichjenkov:component-toolkit:0.5.10")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-                implementation("androidx.activity:activity-compose:1.8.0")
+                implementation("androidx.activity:activity-compose:1.8.1")
             }
         }
     }
