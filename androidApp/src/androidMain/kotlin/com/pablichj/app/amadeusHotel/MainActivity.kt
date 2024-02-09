@@ -4,13 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.macaosoftware.component.AndroidComponentRender
-import com.macaosoftware.component.navbar.BottomNavigationComponent
-import com.macaosoftware.component.navbar.BottomNavigationComponentDefaults
-import com.macaosoftware.platform.AndroidBridge
+import com.macaosoftware.component.bottomnavigation.BottomNavigationComponent
+import com.macaosoftware.component.bottomnavigation.BottomNavigationComponentDefaults
 
 class MainActivity : ComponentActivity() {
-
-    val androidBridge = AndroidBridge()
 
     val bottomNavigationComponent = BottomNavigationComponent(
         viewModelFactory = RootBottomNavigationDemoViewModelFactory(
@@ -24,7 +21,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidComponentRender(
                 rootComponent = bottomNavigationComponent,
-                androidBridge = androidBridge,
                 onBackPress = { finish() }
             )
         }

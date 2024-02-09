@@ -24,12 +24,12 @@ class AccountComponent : Component() {
         authComponent.setParent(this)
     }
 
-    override fun onStart() {
-        authComponent.dispatchStart()
+    override fun onActive() {
+        authComponent.dispatchActive()
     }
 
-    override fun onStop() {
-        authComponent.dispatchStop()
+    override fun onInactive() {
+        authComponent.dispatchInactive()
     }
 
     @Composable

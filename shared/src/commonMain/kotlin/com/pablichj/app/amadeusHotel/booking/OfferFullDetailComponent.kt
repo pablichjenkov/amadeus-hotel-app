@@ -27,7 +27,7 @@ class OfferFullDetailComponent(
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val accessTokenDao = InMemoryAccessTokenDao()
 
-    override fun onStart() {
+    override fun onActive() {
         doRoomBooking()
     }
 
