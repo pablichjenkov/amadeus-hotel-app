@@ -5,9 +5,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.singleWindowApplication
 import com.macaosoftware.component.DesktopComponentRender
-import com.macaosoftware.component.navbar.BottomNavigationComponent
-import com.macaosoftware.component.navbar.BottomNavigationComponentDefaults
-import com.macaosoftware.platform.DesktopBridge
+import com.macaosoftware.component.bottomnavigation.BottomNavigationComponent
+import com.macaosoftware.component.bottomnavigation.BottomNavigationComponentDefaults
+import com.macaosoftware.plugin.DesktopBridge
 
 fun main() {
     //todo: Use the adaptable node in this case

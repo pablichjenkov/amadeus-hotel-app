@@ -1,8 +1,9 @@
 package com.pablichj.app.amadeusHotel
 
-import com.macaosoftware.component.navbar.BottomNavigationComponent
-import com.macaosoftware.component.navbar.BottomNavigationComponentViewModelFactory
-import com.macaosoftware.component.navbar.BottomNavigationStatePresenterDefault
+import com.macaosoftware.component.bottomnavigation.BottomNavigationComponent
+import com.macaosoftware.component.bottomnavigation.BottomNavigationComponentViewModelFactory
+import com.macaosoftware.component.bottomnavigation.BottomNavigationStatePresenterDefault
+
 
 class RootBottomNavigationDemoViewModelFactory(
     private val bottomNavigationStatePresenter: BottomNavigationStatePresenterDefault

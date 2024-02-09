@@ -48,7 +48,7 @@ class SignInComponent(private val authManager: AuthManager) : Component() {
         }
     }
 
-    override fun onStop() {
+    override fun onInactive() {
         coroutineScope.coroutineContext.cancelChildren()
     }
 
